@@ -9,6 +9,9 @@ packages = [{include = "django_market_place"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 django = "^5.1.7"
+psycopg2-binary = "^2.9.10"
+pillow = "^11.1.0"
+ipython = "^9.0.2"
 
 
 [build-system]
