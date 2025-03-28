@@ -1,0 +1,46 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block title %}Добавить продукт{% endblock %}
+
+{% block content %}
+<div class="row text-center">
+  <h1>Новый продукт</h1>
+</div>
+<div class="container">
+  <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="name_product" class="form-label">Название продукта</label>
+      <input type="text" class="form-control" name="name_product" id="name_product" placeholder="Введите название продукта" required>
+    </div>
+    <div class="mb-1">
+      <label for="category" class="form-label">Категория</label>
+      <select class="form-select" name="category" id="category">
+        <option selected>-</option>
+        {% for category in categories %}
+          <option value="{{ category.id }}">{{ category.name_category }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <a href="/add_category/">
+        <button type="button" class="btn btn-block btn-outline-secondary" >Добавить категорию</button>
+      </a>
+    </div>
+    <div class="mb-3">
+        <label for="description">Описание продукта</label>
+        <textarea type="text" name="description" class="form-control" id="description" placeholder="Введите описание продукта" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Стоимость</label>
+      <input type="number" class="form-control" name="price" id="price" placeholder="Укажите стоимость продукта" required min="0">
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Изображение продукта</label>
+      <input class="form-control" type="file" id="image" name="image" accept="image/*">
+    </div>
+    <button type="submit" class="btn btn-success">Добавить</button>
+  </form>
+</div>
+{% endblock %}
+
