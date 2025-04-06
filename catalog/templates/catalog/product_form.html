@@ -1,0 +1,24 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Добавить продукт{% endblock %}
+
+{% block content %}
+<div class="row text-center">
+    <h1>Новый продукт</h1>
+</div>
+<div class="container">
+    <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">
+            {% if object %}
+                Сохранить
+            {% else %}
+                Создать
+            {% endif %}
+        </button>
+        <a href="/" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}
+
