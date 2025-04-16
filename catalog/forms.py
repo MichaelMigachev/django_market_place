@@ -1,10 +1,11 @@
 from django.forms import ModelForm
+from django import forms
 from .models import Product
 from django.core.exceptions import ValidationError
 
-
 forbidden = ['казино', 'криптовалюта', 'крипта', 'биржа',
              'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
+
 
 class ProductForm(ModelForm):
     class Meta:
@@ -12,6 +13,17 @@ class ProductForm(ModelForm):
         fields = ('name_product', 'description', 'image', 'category', 'price',)
         # fields = "__all__"                       # если нужны все поля
         # exclude = ("created_at", "updated_at",)  # исключить поля
+
+    def __init__(self, *args, **kwargs):
+        super(ProductForm, self).__init__(*args, **kwargs)
+        self.fields['name_product'].widget.attrs.update({
+            'class': 'form-control',  # Добавление CSS-класса для стилизации поля
+            'placeholder': 'Введите имя'  # Текст подсказки внутри поля
+        })
+        self.fields['description'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите описание'})
+        self.fields['image'].widget.attrs.update({'class': 'form-control'})
+        self.fields['category'].widget.attrs.update({'class': 'form-control'})
+        self.fields['price'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите цену'})
 
     def clean_name_product(self):
         name_product = self.cleaned_data.get('name_product')

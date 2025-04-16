@@ -1,18 +1,16 @@
 <!doctype html>
 <html lang="ru" data-bs-theme="auto">
+{% load static %}
 <head>
     <script src="/static/js/color-modes.js"></script>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Пример на bootstrap 5: Простой одностраничный шаблон · Версия v5.3.1">
-<!--    <title>Альбом | Album example for Bootstrap · Версия v5.3.1</title>-->
     <title>{% block title %}Базовый шаблон{% endblock %}</title>
     <link rel="canonical" href="https://bootstrap-4.ru/docs/5.3/examples/album/">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-
+    <!--    <link rel="stylesheet" href="/static/css/bootstrap.min.css">-->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -170,7 +168,7 @@
 
 
 <header data-bs-theme="dark">
-{% include 'catalog/includes/inc_menu.html' %}
+    {% include 'catalog/includes/inc_menu.html' %}
 </header>
 
 <main>
@@ -180,7 +178,8 @@
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Каталог</h1>
                 <p class="lead text-body-secondary">Только самые лучшие товары</p>
-                <a class="btn btn-primary rounded" href="{% url 'catalog:product_create' %}" role="button">Добавить продукт</a>
+                <a class="btn btn-primary rounded" href="{% url 'catalog:product_create' %}" role="button">Добавить
+                    продукт</a>
                 </p>
             </div>
         </div>
