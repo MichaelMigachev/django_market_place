@@ -4,29 +4,35 @@
 
 {% block content %}
 <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                {% for product in object_list %}
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="{{ product.image | media_filter }}" style="width: 150px" alt="{{ name_product }}">
-<!--                        <img src="{{ product.image | media_filter }}">-->
-                        <div class="card-body">
-                            <p class="card-text">{{product.name_product}}</p>
-                            <li>- {{ product.description|truncatechars:30 }}</li>
-                            <p> </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a class="btn btn-primary" href="/product/{{ product.id }}" role="button">Посмотреть</a>
-                                    <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Редактировать</a>
-                                    <a class="btn btn-primary" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
-                                </div>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for product in object_list %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="{{ product.image | media_filter }}" style="width: 150px" alt="{{ name_product }}">
+                    <!--                        <img src="{{ product.image | media_filter }}">-->
+                    <div class="card-body">
+                        <p class="card-text">{{product.name_product}}</p>
+                        <li>- {{ product.description|truncatechars:30 }}</li>
+                        <p></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if user.is_authenticated %}
+                            <div class="btn-group">
+                                <a class="btn btn-primary" href="/product/{{ product.id }}" role="button">Посмотреть</a>
+                                <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}"
+                                   role="button">Редактировать</a>
+                                <a class="btn btn-primary" href="{% url 'catalog:product_delete' product.pk %}"
+                                   role="button">Удалить</a>
                             </div>
+                            {% else %}
+                              <p>Для просмотра выполните вход или зарегистрируйтесь!</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>
+</div>
 {% endblock %}
