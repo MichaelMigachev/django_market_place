@@ -178,8 +178,17 @@
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Каталог</h1>
                 <p class="lead text-body-secondary">Только самые лучшие товары</p>
+                {% if user.is_authenticated %}
+                <p class="lead text-body-secondary">Добро пожаловать, {{ user.email }}!</p>
                 <a class="btn btn-primary rounded" href="{% url 'catalog:product_create' %}" role="button">Добавить
                     продукт</a>
+                {% else %}
+                <p class="lead text-body-secondary">Добро пожаловать в наш магазин!</p>
+                <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+                    <a class="btn btn-primary" href="{% url 'users:login' %}">Войти</a>
+                    <a class="btn btn-secondary" href="{% url 'users:register' %}">Зарегистрироваться</a>
+                </div>
+                {% endif %}
                 </p>
             </div>
         </div>
