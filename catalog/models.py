@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from users.models import User
 
 
 # Create your models here.
@@ -23,6 +25,14 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='Цена продукта')
     created_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
+    is_available = models.BooleanField(default=False, verbose_name="Доступность в каталоге")
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name="Владелец",
+        related_name="products",
+        null=True,
+    )
 
     def __str__(self):
         return f'{self.name_product} - {self.category}. Описание: {self.description}. Цена: {self.price}'
@@ -31,5 +41,9 @@ class Product(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         ordering = ['name_product']
+        permissions = [
+            ("can_unpublish_product", "Можно отменить публикацию продукта"),
+            ("remove_any_product", "Удалить любой продукт"),
+        ]
 
 
