@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-from catalog.models import Product, Category
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
@@ -7,11 +6,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 
 from .forms import ProductForm, ProductModeratorForm
+from catalog.models import Product, Category
+from catalog.services import get_products_by_category, get_products_by_category_from_cache, get_products_from_cache
 
 
 
 class ProductListView(ListView):
     model = Product
+
+    def get_queryset(self):
+        return get_products_from_cache()
 #   путь
 # app_name/<model_name>_<action>     имя_приложения/<имя_модели>_<действие>
 # catalog/product_list.html
@@ -62,5 +66,21 @@ class ContactsView(TemplateView):
     template_name = 'catalog/contacts.html'
 
 
+class CategoryProductsView(LoginRequiredMixin, ListView):
+    template_name = 'catalog/category_products.html'
+    context_object_name = 'products'
 
+    def setup(self, request, *args, **kwargs):
+        """Инициализация атрибутов перед обработкой запроса"""
+        super().setup(request, *args, **kwargs)
+        self.category = get_object_or_404(Category, id=kwargs['category_id'])
 
+    def get_queryset(self):
+        """Получаем продукты категории с кешированием"""
+        return get_products_by_category_from_cache(self.category.id)
+
+    def get_context_data(self, **kwargs):
+        """Добавляем категорию в контекст"""
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.category
+        return context
