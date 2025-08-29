@@ -1,0 +1,67 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name_product": "Смартфон",
+        "description": "Последняя модель смартфона",
+        "image": "",
+        "category": 1,
+        "price": 559,
+        "created_at": "2025-03-22",
+        "updated_at": "2025-03-22T15:12:00.961Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name_product": "Роман",
+        "description": "Художественная литература",
+        "image": "",
+        "category": 3,
+        "price": 9,
+        "created_at": "2025-03-22",
+        "updated_at": "2025-03-22T15:04:21.156Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name_product": "Рубашка",
+        "description": "С коротким руковом",
+        "image": "",
+        "category": 2,
+        "price": 34,
+        "created_at": "2025-03-22",
+        "updated_at": "2025-03-22T15:04:21.156Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "name_product": "Планшет",
+        "description": "Топовая модель планшета",
+        "image": "",
+        "category": 1,
+        "price": 699,
+        "created_at": "2025-03-22",
+        "updated_at": "2025-03-22T15:04:21.158Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "name_product": "Сказка",
+        "description": "Для детей",
+        "image": "",
+        "category": 3,
+        "price": 7,
+        "created_at": "2025-03-22",
+        "updated_at": "2025-03-22T15:04:21.159Z"
+    }
+}
+]

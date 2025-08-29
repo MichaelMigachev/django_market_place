@@ -1,0 +1,40 @@
+<div class="collapse text-bg-dark" id="navbarHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+                <h4>Каталог товаров</h4>
+                <p class="text-body-secondary">Добро пожаловать в лучший онлайн-магазин! Желаем приятных покупок!</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+                <h4>Навигация</h4>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'catalog:products_list' %}" class="text-white">Главная</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+	                    <form method="post" action="{% url 'users:logout' %}" style="display: inline;">
+	                        {% csrf_token %}
+	                        <button type="submit" class="btn btn-link nav-link"><u>Выйти</u>
+	                        </button>
+	                    </form>
+	                </li>
+                {% else %}
+                    <li><a href="{% url 'users:login' %}" class="text-white">Вход</a></li>
+                    <li><a href="{% url 'users:register' %}" class="text-white">Регистрация</a></li>
+                {% endif %}
+                    <li><a href="{% url 'catalog:contacts' %}" class="text-white">Наши контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+        <a href="{% url 'blog:post_list' %}" class="navbar-brand d-flex align-items-center">
+            <strong>наш БЛОГ</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
